@@ -1,0 +1,303 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.5.3
+-- Dumped by pg_dump version 9.5.3
+
+-- Started on 2016-10-22 10:34:56 WIB
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 1 (class 3079 OID 12623)
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 2402 (class 0 OID 0)
+-- Dependencies: 1
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 186 (class 1259 OID 16446)
+-- Name: ws_debt_detail; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE ws_debt_detail (
+    id bigint NOT NULL,
+    debt_id bigint NOT NULL,
+    user_id bigint NOT NULL,
+    debt_owner bigint NOT NULL,
+    debt_amount integer NOT NULL,
+    deadline time without time zone,
+    status smallint NOT NULL,
+    status_update_time time without time zone,
+    create_time time without time zone DEFAULT now() NOT NULL,
+    update_time time without time zone,
+    notes character varying(500)
+);
+
+
+ALTER TABLE ws_debt_detail OWNER TO postgres;
+
+--
+-- TOC entry 185 (class 1259 OID 16444)
+-- Name: ws_debt_detail_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE ws_debt_detail_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE ws_debt_detail_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2403 (class 0 OID 0)
+-- Dependencies: 185
+-- Name: ws_debt_detail_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE ws_debt_detail_id_seq OWNED BY ws_debt_detail.id;
+
+
+--
+-- TOC entry 184 (class 1259 OID 16432)
+-- Name: ws_debt_header; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE ws_debt_header (
+    id bigint NOT NULL,
+    occasion_name character varying(500) NOT NULL,
+    occasion_time time without time zone DEFAULT now() NOT NULL,
+    debt_owner bigint NOT NULL,
+    total_debt integer NOT NULL,
+    notes character varying(500),
+    create_time time without time zone DEFAULT now() NOT NULL,
+    update_time time without time zone DEFAULT now() NOT NULL
+);
+
+
+ALTER TABLE ws_debt_header OWNER TO postgres;
+
+--
+-- TOC entry 183 (class 1259 OID 16430)
+-- Name: ws_debt_header_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE ws_debt_header_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE ws_debt_header_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2404 (class 0 OID 0)
+-- Dependencies: 183
+-- Name: ws_debt_header_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE ws_debt_header_id_seq OWNED BY ws_debt_header.id;
+
+
+--
+-- TOC entry 182 (class 1259 OID 16418)
+-- Name: ws_user; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE ws_user (
+    id bigint NOT NULL,
+    name character varying,
+    age integer,
+    sex character varying,
+    username character varying(20),
+    password character(60),
+    email character varying(200)
+);
+
+
+ALTER TABLE ws_user OWNER TO postgres;
+
+--
+-- TOC entry 181 (class 1259 OID 16416)
+-- Name: ws_user_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE ws_user_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE ws_user_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2405 (class 0 OID 0)
+-- Dependencies: 181
+-- Name: ws_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE ws_user_id_seq OWNED BY ws_user.id;
+
+
+--
+-- TOC entry 2267 (class 2604 OID 16449)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY ws_debt_detail ALTER COLUMN id SET DEFAULT nextval('ws_debt_detail_id_seq'::regclass);
+
+
+--
+-- TOC entry 2263 (class 2604 OID 16435)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY ws_debt_header ALTER COLUMN id SET DEFAULT nextval('ws_debt_header_id_seq'::regclass);
+
+
+--
+-- TOC entry 2262 (class 2604 OID 16421)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY ws_user ALTER COLUMN id SET DEFAULT nextval('ws_user_id_seq'::regclass);
+
+
+--
+-- TOC entry 2394 (class 0 OID 16446)
+-- Dependencies: 186
+-- Data for Name: ws_debt_detail; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY ws_debt_detail (id, debt_id, user_id, debt_owner, debt_amount, deadline, status, status_update_time, create_time, update_time, notes) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2406 (class 0 OID 0)
+-- Dependencies: 185
+-- Name: ws_debt_detail_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('ws_debt_detail_id_seq', 1, false);
+
+
+--
+-- TOC entry 2392 (class 0 OID 16432)
+-- Dependencies: 184
+-- Data for Name: ws_debt_header; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY ws_debt_header (id, occasion_name, occasion_time, debt_owner, total_debt, notes, create_time, update_time) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2407 (class 0 OID 0)
+-- Dependencies: 183
+-- Name: ws_debt_header_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('ws_debt_header_id_seq', 1, false);
+
+
+--
+-- TOC entry 2390 (class 0 OID 16418)
+-- Dependencies: 182
+-- Data for Name: ws_user; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY ws_user (id, name, age, sex, username, password, email) FROM stdin;
+2	asdasdasdasd	17	F	asdasdasd	asdasdasdasd                                                	\N
+3	asdasdasdasd	17	F	asdasdasd	asdasdasdasd                                                	\N
+4	asdasdasdasd	17	F	asdasdasd	$2a$10$4loNh9WWzT6wAjykY4A83.qRlYr85DbuufPIXjrYOK9rOefWumPDK	\N
+5	asdasdasdasd	17	F	asdasdasd	$2a$10$xLnX7U6qtEi/7OT7BXcUHeJ32eE6tTHdlFXHJqsxHYOdtoSSSRsim	\N
+6	elvira	17	F	elvira	$2a$10$.uQ6WqIQ5/6g5MvCKrjOu.ly8SptbHldT6e2u6gEJOlI3RWxQtSLC	\N
+1	Elvira	23	F	andreasnvr	$2a$10$XCAAEwSSeaciafXVp/V95.W6/ZMkJXio9NDkf3BG//bB9hjiRlrce	andreasnvr@gmail.com
+\.
+
+
+--
+-- TOC entry 2408 (class 0 OID 0)
+-- Dependencies: 181
+-- Name: ws_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('ws_user_id_seq', 6, true);
+
+
+--
+-- TOC entry 2274 (class 2606 OID 16455)
+-- Name: ws_debt_detail_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY ws_debt_detail
+    ADD CONSTRAINT ws_debt_detail_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2272 (class 2606 OID 16443)
+-- Name: ws_debt_header_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY ws_debt_header
+    ADD CONSTRAINT ws_debt_header_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2270 (class 2606 OID 16426)
+-- Name: ws_user_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY ws_user
+    ADD CONSTRAINT ws_user_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2401 (class 0 OID 0)
+-- Dependencies: 6
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+-- Completed on 2016-10-22 10:34:56 WIB
+
+--
+-- PostgreSQL database dump complete
+--
+
