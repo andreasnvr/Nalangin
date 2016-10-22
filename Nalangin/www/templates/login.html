@@ -1,0 +1,17 @@
+<ion-view title="Login" hide-nav-bar="true" id="page5" style="background-color:#C06E38;" class=" ">
+    <ion-content padding="true" style="background: url(img/sRTRPxzUQZP1G7gFqSGU_bg-colored.jpg) no-repeat center;background-size:cover;" class="manual-ios-statusbar-padding">
+        <form id="login-form1" class="list ">
+            <label class="item item-input " id="login-input1">
+                <span class="input-label">Username</span>
+                <input type="text" placeholder=""  ng-model="loginData.username">
+            </label>
+            <label class="item item-input " id="login-input2">
+                <span class="input-label">Password</span>
+                <input type="password" placeholder=""  ng-model="loginData.password">
+            </label>
+        </form>
+        <div class="spacer" style="height: 40px;"></div>
+        <button id="login-button" class=" button button-stable  button-block " ng-click="login()">Log in</button>
+        <a href="#" onclick="window.open('#/signup', '_system', 'location=yes'); return false;" id="button-signup" class=" button button-balanced  button-block button-clear ">Or create an account</a>
+    </ion-content>
+</ion-view>
