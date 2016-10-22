@@ -2,7 +2,7 @@
 Nalangin Is a Akwardness Social Solutions to Debt problem among us
 
 
-Project Consist of Servers side folders (node.js with express) and client side ( with ionic)
+Project Consist of Servers side folders (node.js with express) and client side ( with ionic inside Nalangin subfolders)
 
 How to Run program : 
 - install Node and Express
