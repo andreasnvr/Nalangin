@@ -9,3 +9,7 @@ How to Run program :
 - install Ionic
 - npm start 
 - ionic serve
+
+Database : 
+- Postgres SQL
+
