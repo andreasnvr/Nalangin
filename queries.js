@@ -51,7 +51,7 @@ function signUp(param, callback) {
   var gender   = param.gender;
   var birth    = param.birth;
   var values   = "'"+name+"',"+17+",'"+gender+"','"+username+"','"+password+"'"
-
+  //command
   var query    = "INSERT INTO ws_user (name,age,sex,username,password) VALUES ("+values+")";
 
   db.query(query)
